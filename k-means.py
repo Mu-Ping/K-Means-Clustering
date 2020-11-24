@@ -28,19 +28,68 @@ def gen_data():
     
     
 def start():    
+
     ani = animation.FuncAnimation(fig=fig, func=update, frames=frames, init_func = init, interval=1200, blit=False, repeat=False) #動畫
     canvas1.draw()
     
 
 def init(): 
-    pass
+    for i in range(cluster.get()): #群心
+        center_x = np.random.randint(-40, 40)
+        center_y = np.random.randint(-40, 40)
+        center.append((center_x, center_y))
+        plot.append(plt.plot(center_x, center_y, 'o', ms=5 , color = color[i], alpha=1)) 
         
 def update(i): #2維資料更新參數
-    pass
+    global plot
+    global center_data
+    if(i==0):
+        for i in plot:
+            i[0].remove()
+        plot=[]
+        
+        for i in range(cluster.get()): #更新群心
+            data_count = 0
+            sum_x = 0
+            sum_y = 0
+            for j in center_data[i]:
+                sum_x+=j[0]
+                sum_y+=j[1]
+                data_count+=1
+                
+            if(data_count==0):
+                center[i]=center[i]
+            else:
+                center[i]=[sum_x/data_count, sum_y/data_count]
+            plot.append(plt.plot(center[i][0], center[i][1], 'o', ms=5 , color = color[i], alpha=1))
+            
+    elif(i==1):
+        plt.clf()
+        plt.title("Data")
+        plot=[]
+        center_data=[[] for _ in range(cluster.get())]
+        for i in range(cluster.get()):
+            plot.append(plt.plot(center[i][0], center[i][1], 'o', ms=5 , color = color[i], alpha=1))
+        
+        for i in data:                 #資料
+            min_x = 0
+            min_y = 0
+            min_distance = float("inf")
+            min_index = 0
+            for center_index in range(cluster.get()):
+                distance = ((center[center_index][0]-i[0])**2 + (center[center_index][1]-i[1])**2)**0.5 # 採取歐基里德距離，其他評估標準亦可
+                if(distance < min_distance):
+                    min_x = i[0]
+                    min_y = i[1]
+                    min_distance = distance
+                    min_index = center_index
+                    
+            center_data[min_index].append([min_x, min_y]) 
+            plt.plot(i[0], i[1], 'o', ms=4 , color = color[min_index], alpha=.2) 
         
         
 def frames(): # 禎數生成器
-    for i in range(1,60):
+    for i in range(60):
         yield i%2
 
 window = tk.Tk()
@@ -54,7 +103,7 @@ cluster.set(3)
 color = ["#FF0000", "#0000E3", "#FFD306", "#FF5809", "#02DF82", "#6F00D2", "#73BF00"]
 center = [] #群心
 center_data = [[] for _ in range(cluster.get())] #群心資料
-plot = [] #群心圖
+plot = [] #群心
 
 
 setting1 = tk.Frame(window)
