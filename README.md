@@ -2,8 +2,10 @@
 ## 簡介
 * k-means是**一種「聚類」的非監督式學習演算法**，根據**相似性原則**，將具有較高相似度的數據對象劃分至同一類
 * k-means以**數據間的距離作為相似性則的度量標準**，越小，則數據的相似性越高，越有可能被分在同一類。
-* 距離的計算方法有很多種，如以下三類：
+* 衡量「距離」方法有很多種，如以下三類：
   * Minkowski Distance  
+  
+       <img src="https://render.githubusercontent.com/render/math?math=\root n \of {\sum_{i=1}^{p}x_i+y_i}">  
   
   * Euclidean Distance ( k mean最常使用 )
   
