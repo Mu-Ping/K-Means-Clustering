@@ -15,7 +15,7 @@
   
        <img src="https://render.githubusercontent.com/render/math?math=d = \sum_{i=1}^{p}|x_i%2Dy_i|"> 
   
-* 算法中的k代表類別數，means代表同類內數據的均值（均值用來表示該類的群心），因此，k-means又稱為k-均值算法。
+* 算法中的k代表類別數，means代表同類內數據的均值（表示該類的群心），因此，k-means又稱為k-均值算法。
 
 * 聚類與分類最大的區別在於：
   * 「聚類為非監督式學習」，即待處理數據對像沒有任何先驗知識
