@@ -53,5 +53,5 @@
 ## 演算法改進
 * 缺點1 - 可透過「ISODATA」演算法改進
 * 缺點2 - 可透過「K-Means++」演算法改進
-## 使用範例圖
+## 程式範例圖
 ![](https://i.imgur.com/qXIXrpY.png)
