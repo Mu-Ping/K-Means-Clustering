@@ -12,7 +12,7 @@
 ### 範例圖：
 ![](https://i.imgur.com/qXIXrpY.png)
 
-## 演算法
+## K-Means演算法
 ### 演算法步驟
   1. 首先输入 k 值，即希望透過聚類( clusting )來分成 k 組 
   
